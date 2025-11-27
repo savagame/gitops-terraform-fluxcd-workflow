@@ -56,8 +56,7 @@ resource "azurerm_kubernetes_cluster" "gitops_aks" {
 
 }
 
-# Define an Azure Container Registry with the name gitops-terraform-acr in the same resource group as the AKS cluster.
-# The SKU is set to Basic and the admin user is disabled.
+
 
 resource "azurerm_container_registry" "gitops_acr" {
   name                = "gitops${var.environment}acr"
@@ -67,7 +66,7 @@ resource "azurerm_container_registry" "gitops_acr" {
   admin_enabled       = false
 }
 
-# Define a role assignment to allow the AKS cluster to pull images from the ACR.
+
 
 resource "azurerm_role_assignment" "gitops_acr_role" {
   scope                = azurerm_container_registry.gitops_acr.id
